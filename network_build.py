@@ -61,8 +61,6 @@ for file in following_extract_dir.iterdir():
 
 print(f"Creating network")
 
-print(sorted_unique_person_list)
-
 G = nx.DiGraph()
 
 for nodes in sorted_unique_person_list:
