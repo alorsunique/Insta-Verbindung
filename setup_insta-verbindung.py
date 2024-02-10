@@ -26,3 +26,13 @@ if entry_list[0]:
 
     if not resources_dir.exists():
         os.mkdir(resources_dir)
+
+    input_text_dir = resources_dir / "Input Text"
+
+    if not input_text_dir.exists():
+        os.mkdir(input_text_dir)
+
+    following_extract_dir = resources_dir / "Following Extract"
+
+    if not following_extract_dir.exists():
+        os.mkdir(following_extract_dir)
