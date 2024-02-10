@@ -91,12 +91,10 @@ leaf_nodes_list = []
 for node in G.nodes:
     #print(f"{node} | {G.in_degree[node]} | {G.out_degree[node]}")
     if G.in_degree[node] < 2 and not G.out_degree[node] > 0:
-        print(f"{node} | {G.in_degree[node]} | {G.out_degree[node]}")
         leaf_nodes_list.append(node)
 
-print(leaf_nodes_list)
-
 for entry in leaf_nodes_list:
+    print(f"Removing: {entry}")
     G.remove_node(entry)
 
 output_path = output_network_dir / "Stripped Network.gexf"
