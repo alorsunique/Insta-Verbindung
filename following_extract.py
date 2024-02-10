@@ -16,7 +16,6 @@ following_extract_dir = resources_dir / "Following Extract"
 
 
 for text_file in input_text_dir.iterdir():
-    print(text_file)
     with open(text_file, "r", encoding="utf-8") as following:
         import_list = following.readlines()
 
@@ -29,4 +28,12 @@ for text_file in input_text_dir.iterdir():
         if "profile picture" in entry:
             following_list.append(entry[:-19])
 
-    print(following_list)
+    sorted_following_list = sorted(following_list)
+
+    output_text_path = following_extract_dir / f"{text_file.stem}.txt"
+    if output_text_path.exists():
+        os.remove(output_text_path)
+
+    with open(output_text_path, "w") as output_file:
+        for following in sorted_following_list:
+            output_file.write(f"{following}\n")
