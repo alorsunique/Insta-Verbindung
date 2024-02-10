@@ -3,8 +3,6 @@ from pathlib import Path
 
 script_path = Path(__file__).resolve()
 
-
-
 project_dir = script_path.parent
 os.chdir(project_dir)
 
@@ -13,7 +11,6 @@ with open("Resources_Path.txt", "r") as resources_text:
 
 input_text_dir = resources_dir / "Input Text"
 following_extract_dir = resources_dir / "Following Extract"
-
 
 for text_file in input_text_dir.iterdir():
     with open(text_file, "r", encoding="utf-8") as following:
