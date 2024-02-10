@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 
+import networkx as nx
+import numpy as np
+
 script_path = Path(__file__).resolve()
 
 project_dir = script_path.parent
@@ -10,6 +13,7 @@ with open("Resources_Path.txt", "r") as resources_text:
     resources_dir = Path(resources_text.readline())
 
 following_extract_dir = resources_dir / "Following Extract"
+output_network_dir = resources_dir / "Output Network"
 
 unique_person_list = []
 
@@ -31,4 +35,60 @@ for file in following_extract_dir.iterdir():
         if formatted_entry not in unique_person_list:
             unique_person_list.append(formatted_entry)
 
-print(unique_person_list)
+sorted_unique_person_list = sorted(unique_person_list)
+
+print(f"People Count: {len(sorted_unique_person_list)}")
+
+matrix_shell = np.zeros((len(sorted_unique_person_list), len(sorted_unique_person_list)))
+
+for file in following_extract_dir.iterdir():
+    username = file.stem
+
+    print(username)
+
+    row_index = sorted_unique_person_list.index(username)
+
+    with open(file, "r") as following:
+        following_list = following.readlines()
+
+    for entry in following_list:
+        formatted_entry = entry[:-1]
+        column_index = sorted_unique_person_list.index(formatted_entry)
+
+        print(f"{username} | {row_index} | {formatted_entry} | {column_index}")
+
+        matrix_shell[row_index][column_index] += 1
+
+print(f"Creating network")
+
+print(sorted_unique_person_list)
+
+G = nx.DiGraph()
+
+for nodes in sorted_unique_person_list:
+    G.add_node(nodes)
+
+acount = 0
+
+while acount < len(matrix_shell):
+
+    if sum(matrix_shell[acount]) > 0:
+
+        bcount = 0
+
+        while bcount < len(matrix_shell):
+
+            if matrix_shell[acount][bcount] != 0:
+                edge_weight = matrix_shell[acount][bcount]
+                G.add_edge(sorted_unique_person_list[acount], sorted_unique_person_list[bcount], weight=1)
+
+            bcount += 1
+
+    acount += 1
+
+output_path = output_network_dir / "Network.gexf"
+
+if os.path.exists(output_path):
+    os.remove(output_path)
+
+nx.write_gexf(G, output_path)

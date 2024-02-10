@@ -36,3 +36,13 @@ if entry_list[0]:
 
     if not following_extract_dir.exists():
         os.mkdir(following_extract_dir)
+
+    output_network_dir = resources_dir / "Output Network"
+
+    if not output_network_dir.exists():
+        os.mkdir(output_network_dir)
+
+    piplup_input_dir = resources_dir / "Piplup Input"
+
+    if not piplup_input_dir.exists():
+        os.mkdir(piplup_input_dir)
