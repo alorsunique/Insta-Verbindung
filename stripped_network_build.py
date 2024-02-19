@@ -7,7 +7,6 @@ import numpy as np
 import time
 
 script_path = Path(__file__).resolve()
-
 project_dir = script_path.parent
 os.chdir(project_dir)
 

@@ -4,7 +4,6 @@ from pathlib import Path
 import pandas as pd
 
 script_path = Path(__file__).resolve()
-
 project_dir = script_path.parent
 os.chdir(project_dir)
 

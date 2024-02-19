@@ -5,7 +5,6 @@ import networkx as nx
 import numpy as np
 
 script_path = Path(__file__).resolve()
-
 project_dir = script_path.parent
 os.chdir(project_dir)
 

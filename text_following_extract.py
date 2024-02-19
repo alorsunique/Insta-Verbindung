@@ -2,17 +2,16 @@ import os
 from pathlib import Path
 
 script_path = Path(__file__).resolve()
-
 project_dir = script_path.parent
 os.chdir(project_dir)
 
 with open("Resources_Path.txt", "r") as resources_text:
     resources_dir = Path(resources_text.readline())
 
-input_text_dir = resources_dir / "Input Text"
+text_input_dir = resources_dir / "Text Input"
 following_extract_dir = resources_dir / "Following Extract"
 
-for text_file in input_text_dir.iterdir():
+for text_file in text_input_dir.iterdir():
     with open(text_file, "r", encoding="utf-8") as following:
         import_list = following.readlines()
 
